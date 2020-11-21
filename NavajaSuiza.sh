@@ -220,6 +220,10 @@ case $opcion in
   read enterkey
   ;;
 6)
+ clear
+ exit 0
+ read Internet
+ ;;
 7)
  clear
  exit 0
