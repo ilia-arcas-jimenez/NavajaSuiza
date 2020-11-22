@@ -110,8 +110,6 @@ case $opcion in
   exit 0
   read enterkey
   ;;
-  esac
-  done
 2)
   sleep 2s
   while :
